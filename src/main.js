@@ -3,8 +3,11 @@ const { createCanvas, loadImage } = require("canvas");
 const console = require("console");
 const { layersOrder, format, rarity } = require("./config.js");
 
-const canvas = createCanvas(format.width, format.height);
-const ctx = canvas.getContext("2d");
+//const canvas = createCanvas(format.width, format.height);
+//const ctx = canvas.getContext("2d");
+
+let canvas;
+let ctx;
 
 if (!process.env.PWD) {
   process.env.PWD = process.cwd();
@@ -132,6 +135,8 @@ const createFiles = async edition => {
 
   let numDupes = 0;
  for (let i = 1; i <= edition; i++) {
+   canvas = createCanvas(format.width, format.height);
+   ctx= canvas.getContext("2d");
    await layers.forEach(async (layer) => {
      await drawLayer(layer, i);
    });
